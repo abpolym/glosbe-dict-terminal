@@ -1,6 +1,7 @@
 import argparse
 import requests
 import sys
+from termcolor import colored
 import urllib
 
 def die(errormsg):
@@ -9,9 +10,10 @@ def die(errormsg):
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("lfrom", type=str, help="Language to translate from - in ISO_639 format")
-parser.add_argument("ldest", type=str, help="Language to translate to - in ISO_639 format")
-parser.add_argument("word", type=str, help="Word to translate")
+parser.add_argument('lfrom', type=str, help="Language to translate from - in ISO_639 format")
+parser.add_argument('ldest', type=str, help="Language to translate to - in ISO_639 format")
+parser.add_argument('word', type=str, help="Word to translate")
+#parser.add_argument('--colored', type=bool, nargs=0, help='Print in beautiful colors', default=False)
 args = parser.parse_args()
 word=args.word
 fromlang_iso=args.lfrom
@@ -49,4 +51,12 @@ if not translated: die('No translation available for ' + word)
 translations=list(set(translations))
 #translations=(sorted(translations, key=str.swapcase))
 translations.sort(key=lambda x:(not x.islower(), x))
-for s in translations: print s
+for tsent in translations:
+	for tword in tsent.split():
+		print tword,
+	#	if not args.colored:
+	#		print tword,
+	#		continue
+	#	if tword.islower(): print colored(tword,'blue'),
+	#	else: print colored(tword, 'green'),
+	print
