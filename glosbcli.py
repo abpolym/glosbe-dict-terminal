@@ -8,12 +8,11 @@ def die(errormsg):
 	print errormsg
 	sys.exit(1)
 
-import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('lfrom', type=str, help="Language to translate from - in ISO_639 format")
 parser.add_argument('ldest', type=str, help="Language to translate to - in ISO_639 format")
 parser.add_argument('word', type=str, help="Word to translate")
-#parser.add_argument('--colored', type=bool, nargs=0, help='Print in beautiful colors', default=False)
+parser.add_argument('-c', '--colored', action="store_true", default=False, help='Colorized output')
 args = parser.parse_args()
 word=args.word
 fromlang_iso=args.lfrom
@@ -53,10 +52,9 @@ translations=list(set(translations))
 translations.sort(key=lambda x:(not x.islower(), x))
 for tsent in translations:
 	for tword in tsent.split():
-		print tword,
-	#	if not args.colored:
-	#		print tword,
-	#		continue
-	#	if tword.islower(): print colored(tword,'blue'),
-	#	else: print colored(tword, 'green'),
+		if not args.colored:
+			print tword,
+			continue
+		if tword.islower(): print colored(tword,'blue'),
+		else: print colored(tword, 'yellow'),
 	print
