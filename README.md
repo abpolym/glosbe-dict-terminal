@@ -12,6 +12,32 @@ positional arguments:
 	word        Word to translate
 ```
 
+# Example
+```
+$ python glosbcli.py deu eng unheilvoll
+appearing to be true
+baleful
+balefully
+baneful
+calamitous
+calamitously
+dire
+disasterous
+disasterously
+disastrous
+evil or malignant
+fatal
+likely to grow worse
+malign
+ominous
+ominuosly
+portentous
+portentously
+siderally
+sinister
+unpropitious
+```
+
 # Languages
 Please see the [ISO\_639](http://en.wikipedia.org/wiki/ISO_639:d) format for available languages.
 
