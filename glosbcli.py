@@ -1,3 +1,4 @@
+import argparse
 import requests
 import sys
 import urllib
@@ -6,9 +7,15 @@ def die(errormsg):
 	print errormsg
 	sys.exit(1)
 
-word='ominousududu'
-fromlang_iso='eng'
-destlang_iso='deu'
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("lfrom", type=str, help="Language to translate from - in ISO_639 format")
+parser.add_argument("ldest", type=str, help="Language to translate to - in ISO_639 format")
+parser.add_argument("word", type=str, help="Word to translate")
+args = parser.parse_args()
+word=args.word
+fromlang_iso=args.lfrom
+destlang_iso=args.ldest
 fromparam='from'
 destparam='dest'
 phrase='phrase'
