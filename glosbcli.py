@@ -47,5 +47,6 @@ for trans in rjson[tuc]:
 			translations.append(x[text].encode('utf-8'))
 if not translated: die('No translation available for ' + word)
 translations=list(set(translations))
+#translations=(sorted(translations, key=str.swapcase))
 translations.sort(key=lambda x:(not x.islower(), x))
 for s in translations: print s
