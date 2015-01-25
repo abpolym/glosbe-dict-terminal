@@ -4,12 +4,17 @@ Commandline Dictionary lookup using the [glosbe API](https://glosbe.com/a-api)
 # Usage
 ```
 $ python globscli.py -h
-usage: glosbcli.py [-h] lfrom ldest word
+usage: glosbcli.py [-h] [-c] [-e] lfrom ldest word
 
 positional arguments:
-	lfrom       Language to translate from - in ISO_639 format
-	ldest       Language to translate to - in ISO_639 format
-	word        Word to translate
+  lfrom           Language to translate from - in ISO_639 format
+    ldest           Language to translate to - in ISO_639 format
+	  word            Word to translate
+
+	  optional arguments:
+	    -h, --help      show this help message and exit
+		  -c, --colored   Colorized output
+		    -e, --examples  Show examples
 ```
 
 # Example
