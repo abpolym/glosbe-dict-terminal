@@ -1,4 +1,5 @@
 import argparse
+import re
 import requests
 import sys
 from termcolor import colored
@@ -13,6 +14,7 @@ parser.add_argument('lfrom', type=str, help="Language to translate from - in ISO
 parser.add_argument('ldest', type=str, help="Language to translate to - in ISO_639 format")
 parser.add_argument('word', type=str, help="Word to translate")
 parser.add_argument('-c', '--colored', action="store_true", default=False, help='Colorized output')
+parser.add_argument('-e', '--examples', action="store_true", default=False, help='Show examples')
 args = parser.parse_args()
 word=args.word
 fromlang_iso=args.lfrom
@@ -24,9 +26,11 @@ meanings='meanings'
 tuc='tuc'
 text='text'
 language='language'
+examples='examples'
 baseurl = 'https://glosbe.com/gapi/translate'
 queryparams = urllib.urlencode({fromparam:fromlang_iso,destparam:destlang_iso,phrase:word,'format':'json'})
 url=baseurl+'?'+queryparams
+if args.examples: url+='&tm=true'
 
 r = requests.get(url)
 if r.status_code != 200: die('Statuscode != 200')
@@ -57,4 +61,25 @@ for tsent in translations:
 			continue
 		if tword.islower(): print colored(tword,'blue'),
 		else: print colored(tword, 'yellow'),
+		#else: print colored(tword, 'yellow', attrs=['underline']),
 	print
+
+if not args.examples: sys.exit(0)
+
+print '--------------------------------'
+print '--------------------------------'
+
+for ex in rjson[examples]:
+	#print re.match('<strong class="keyword">.*?</strong>',ex['first'])
+	#print ex['first']
+	#for m in re.findall('<strong class="keyword">([\s\w\.\-]+)</strong>', ex['first']): print m
+	p=re.compile('<strong class="keyword">[\u\s\w\.\-]+</strong>',re.UNICODE)
+	p2=re.compile('<strong class="keyword">([\s\w\.\-]+)</strong>',re.UNICODE)
+	#for m in re.findall('<strong class="keyword">[\s\w\.\-]+</strong>', ex['second']): print p.sub('DDD',ex['second'])
+	for m in p.findall(ex['second']):
+		for i in p2.findall(m):
+			ex['second']=p.sub(colored(i,'yellow'),ex['second'])
+	print ex['second']
+	#print ex['second']
+	#print re.search('strong', ex['first'])
+	#print ex['second']
