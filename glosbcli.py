@@ -39,9 +39,9 @@ for trans in rjson[tuc]:
 	if phrase in trans:
 		transphrase=trans[phrase]
 		if transphrase[language] != destlang: continue
-		print transphrase[text]
+		print transphrase[text].encode('utf-8')
 	if meanings in trans:
 		for x in trans[meanings]:
 			if x[language] != destlang: continue
-			print x[text]
+			print x[text].encode('utf-8')
 if not translated: die('No translation available for ' + word)
