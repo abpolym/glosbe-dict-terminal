@@ -33,15 +33,18 @@ rjson = r.json()
 if rjson['result'] != 'ok': die('Query was malformed')
 fromlang=rjson[fromparam]
 destlang=rjson[destparam]
+translations=[]
 translated=0
 for trans in rjson[tuc]:
-	translated=1
+	translated+=1
 	if phrase in trans:
 		transphrase=trans[phrase]
 		if transphrase[language] != destlang: continue
-		print transphrase[text].encode('utf-8')
+		translations.append(transphrase[text].encode('utf-8'))
 	if meanings in trans:
 		for x in trans[meanings]:
 			if x[language] != destlang: continue
-			print x[text].encode('utf-8')
+			translations.append(x[text].encode('utf-8'))
 if not translated: die('No translation available for ' + word)
+translations = sorted(set(translations))
+for s in translations: print s
