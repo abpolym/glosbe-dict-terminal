@@ -70,16 +70,9 @@ print '--------------------------------'
 print '--------------------------------'
 
 for ex in rjson[examples]:
-	#print re.match('<strong class="keyword">.*?</strong>',ex['first'])
-	#print ex['first']
-	#for m in re.findall('<strong class="keyword">([\s\w\.\-]+)</strong>', ex['first']): print m
 	p=re.compile('<strong class="keyword">[\u\s\w\.\-]+</strong>',re.UNICODE)
 	p2=re.compile('<strong class="keyword">([\s\w\.\-]+)</strong>',re.UNICODE)
-	#for m in re.findall('<strong class="keyword">[\s\w\.\-]+</strong>', ex['second']): print p.sub('DDD',ex['second'])
 	for m in p.findall(ex['second']):
 		for i in p2.findall(m):
 			ex['second']=p.sub(colored(i,'yellow'),ex['second'])
 	print ex['second']
-	#print ex['second']
-	#print re.search('strong', ex['first'])
-	#print ex['second']
