@@ -70,3 +70,9 @@ A list of common languages, sorted by the size of the globsbe dictionaries, is h
 | arb | Arabic |
 | vie | Vietnamese |
 | tur | Turkish |
+
+# Issues
+
+If you found any issues with this project or want to suggest new features, please create a new [issue](https://github.com/YASME-Tim/glosbe-dict-terminal/issues).
+
+I'm happy to implement new features!
