@@ -1,5 +1,5 @@
 # glosbe-dict-terminal
-Commandline Dictionary lookup using the [glosbe API](https://glosbe.com/a-api)
+Terminal / Commandline Dictionary lookup client using the [glosbe API](https://glosbe.com/a-api)
 
 # Usage
 ```
