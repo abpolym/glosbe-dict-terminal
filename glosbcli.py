@@ -41,15 +41,16 @@ destlang=rjson[destparam]
 translations=[]
 translated=0
 for trans in rjson[tuc]:
-	translated+=1
 	if phrase in trans:
 		transphrase=trans[phrase]
 		if transphrase[language] != destlang: continue
 		translations.append(transphrase[text].encode('utf-8'))
+		translated+=1
 	if meanings in trans:
 		for x in trans[meanings]:
 			if x[language] != destlang: continue
 			translations.append(x[text].encode('utf-8'))
+			translated+=1
 if not translated: die('No translation available for ' + word)
 translations=list(set(translations))
 #translations=(sorted(translations, key=str.swapcase))
